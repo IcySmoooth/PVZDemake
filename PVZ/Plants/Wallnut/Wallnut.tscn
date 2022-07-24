@@ -1,0 +1,96 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Plants/Wallnut/Wallnut_full-Sheet.png" type="Texture" id=1]
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Wallnut_blink"
+length = 7.0
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 6.8, 6.85, 6.9, 6.95, 7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 1, 0 ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Wallnut:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Wallnut_rotate"
+length = 1.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Wallnut:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0.0, -0.5, -1.0, -1.5, -1.0, -0.5, 0.0, 0.5, 1.0, 1.5, 1.0 ]
+}
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 34.5, 37.5 )
+
+[node name="Wallnut" type="Node2D"]
+position = Vector2( 106, 76 )
+
+[node name="Wallnut" type="Sprite" parent="."]
+scale = Vector2( 2.5, 2.5 )
+texture = ExtResource( 1 )
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Wallnut"]
+autoplay = "Wallnut_blink"
+anims/RESET = SubResource( 2 )
+anims/Wallnut_blink = SubResource( 3 )
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="Wallnut"]
+root_node = NodePath("../..")
+autoplay = "Wallnut_rotate"
+anims/RESET = SubResource( 4 )
+anims/Wallnut_rotate = SubResource( 5 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+position = Vector2( -1.5, -0.5 )
+shape = SubResource( 1 )

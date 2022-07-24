@@ -1,0 +1,182 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Plants/Peashooter/PeaShooter_body-Sheet.png" type="Texture" id=1]
+[ext_resource path="res://Plants/Peashooter/Peashooter.gd" type="Script" id=2]
+[ext_resource path="res://Plants/Peashooter/PeaShooter_head-Sheet.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 27.5, 33 )
+
+[sub_resource type="Animation" id=6]
+resource_name = "Peashooter_Body_Sway"
+length = 1.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 5 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Peashooter_Head:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 2, -18 ), Vector2( 0, -16 ), Vector2( -2, -14 ), Vector2( 0, -16 ), Vector2( 2, -18 ), Vector2( 2, -16 ), Vector2( 3, -14 ), Vector2( 2, -16 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Peashooter_Head/Position2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 10, -1 ), Vector2( 9.5, -0.5 ), Vector2( 9.57143, -0.571429 ), Vector2( 9.64286, -0.642857 ), Vector2( 9.71428, -0.714286 ), Vector2( 9.5, -1.07288e-06 ), Vector2( 9.66667, -0.333334 ), Vector2( 9.83333, -0.666667 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Peashooter_Head:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2, -18 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Peashooter_Head/Position2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 10, -1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Shoot"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 0 ]
+}
+
+[node name="Peashooter" type="Node2D"]
+position = Vector2( 179, 114 )
+script = ExtResource( 2 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+
+[node name="Zombie_Detection_Zone" type="CollisionShape2D" parent="KinematicBody2D"]
+position = Vector2( 1, -2 )
+shape = SubResource( 1 )
+
+[node name="Peashooter_Body" type="Sprite" parent="KinematicBody2D"]
+position = Vector2( -4, 14 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )
+hframes = 7
+
+[node name="Peashooter_Body_Anim" type="AnimationPlayer" parent="KinematicBody2D/Peashooter_Body"]
+autoplay = "Peashooter_Body_Sway"
+reset_on_save = false
+anims/Peashooter_Body_Sway = SubResource( 6 )
+anims/RESET = SubResource( 7 )
+
+[node name="Peashooter_Head" type="Sprite" parent="KinematicBody2D"]
+position = Vector2( 2, -18 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 3 )
+hframes = 7
+
+[node name="Position2D" type="Position2D" parent="KinematicBody2D/Peashooter_Head"]
+position = Vector2( 9.61072, -0.610721 )
+
+[node name="Peashooter_Head_Anim" type="AnimationPlayer" parent="KinematicBody2D/Peashooter_Head"]
+autoplay = "Idle"
+anims/Idle = SubResource( 3 )
+anims/RESET = SubResource( 4 )
+anims/Shoot = SubResource( 5 )
+
+[node name="Shoot_Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="InbetweenTimer" type="Timer" parent="Shoot_Timer"]
+wait_time = 0.2
+
+[connection signal="animation_finished" from="KinematicBody2D/Peashooter_Head/Peashooter_Head_Anim" to="." method="_on_Peashooter_Head_Anim_animation_finished"]
+[connection signal="timeout" from="Shoot_Timer" to="." method="_on_Shoot_Timer_timeout"]
+[connection signal="timeout" from="Shoot_Timer/InbetweenTimer" to="." method="_on_InbetweenTimer_timeout"]

@@ -1,0 +1,130 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Plants/Peashooter/PeaShooter_body-Sheet.png" type="Texture" id=1]
+[ext_resource path="res://Plants/Sunflower/Sunflower_head-Sheet.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 34.5, 37 )
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Sunflower_head:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -13 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Sunflower_Body_Sway"
+length = 1.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 5 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Sunflower_head:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, -29 ), Vector2( -3, -27 ), Vector2( -4, -24 ), Vector2( -1, -28 ), Vector2( 4, -28 ), Vector2( 6, -26 ), Vector2( 7, -24 ), Vector2( 5, -26 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Sunflower_blink"
+length = 7.0
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 0 ]
+}
+
+[node name="Sunflower" type="Node2D"]
+position = Vector2( 188, 107 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+
+[node name="Zombie_Detection_Zone" type="CollisionShape2D" parent="KinematicBody2D"]
+position = Vector2( 0.5, -15 )
+shape = SubResource( 1 )
+
+[node name="Sunflower_body" type="Sprite" parent="KinematicBody2D"]
+position = Vector2( -1, 6 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )
+hframes = 7
+
+[node name="Sunflower_Body_Anim" type="AnimationPlayer" parent="KinematicBody2D/Sunflower_body"]
+autoplay = "Sunflower_Body_Sway"
+anims/RESET = SubResource( 2 )
+anims/Sunflower_Body_Sway = SubResource( 3 )
+
+[node name="Sunflower_head" type="Sprite" parent="KinematicBody2D"]
+position = Vector2( 0, -13 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+hframes = 4
+
+[node name="Sunflower_Head_Anim" type="AnimationPlayer" parent="KinematicBody2D/Sunflower_head"]
+autoplay = "Sunflower_blink"
+anims/RESET = SubResource( 4 )
+anims/Sunflower_blink = SubResource( 5 )
+
+[node name="Sun_Spawn_Timer" type="Timer" parent="."]
+wait_time = 24.0
